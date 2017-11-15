@@ -6,9 +6,9 @@
 ##   The ASF licenses this file to You under the Apache License, Version 2.0
 ##   (the "License"); you may not use this file except in compliance with
 ##   the License.  You may obtain a copy of the License at
-## 
+##
 ##       http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ##   Unless required by applicable law or agreed to in writing, software
 ##   distributed under the License is distributed on an "AS IS" BASIS,
 ##   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,13 +31,18 @@
 MINIMAL_VERSION=1.8.0
 
 # Check if Java is present and the minimal version requirement
-_java=`type java | awk '{ print $ NF }'`
+<<<<<<< HEAD
+_java=`type java | awk 'BEGIN {FS = "is "}; { print $ NF }'`
+CURRENT_VERSION=`"$_java" -version 2>&1 | awk -F'"' '/version/ {first = $1; print}'`
+=======
+_java=`where java | awk -F\, 'NR==1{print $1}'`
 CURRENT_VERSION=`"$_java" -version 2>&1 | awk -F'"' '/version/ {print $2}'`
+>>>>>>> 3ef28b05a... Bash script now works when Java path has spaces
 minimal_version=`echo $MINIMAL_VERSION | awk -F'.' '{ print $2 }'`
 current_version=`echo $CURRENT_VERSION | awk -F'.' '{ print $2 }'`
 if [ $current_version ]; then
         if [ $current_version -lt $minimal_version ]; then
-                 echo "Error: Java version is too low to run JMeter. Needs at least Java >= ${MINIMAL_VERSION}." 
+                 echo "Error: Java version is too low to run JMeter. Needs at least Java >= ${MINIMAL_VERSION}."
                  exit 1
         fi
     else
