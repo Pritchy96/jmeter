@@ -31,7 +31,7 @@
 MINIMAL_VERSION=1.8.0
 
 # Check if Java is present and the minimal version requirement
-_java=`type java | awk '{ print $ NF }'`
+_java=`where java | awk -F\, 'NR==1{print $1}'`
 CURRENT_VERSION=`"$_java" -version 2>&1 | awk -F'"' '/version/ {print $2}'`
 minimal_version=`echo $MINIMAL_VERSION | awk -F'.' '{ print $2 }'`
 current_version=`echo $CURRENT_VERSION | awk -F'.' '{ print $2 }'`
