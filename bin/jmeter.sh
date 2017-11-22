@@ -31,13 +31,8 @@
 MINIMAL_VERSION=1.8.0
 
 # Check if Java is present and the minimal version requirement
-<<<<<<< HEAD
 _java=`type java | awk 'BEGIN {FS = "is "}; { print $ NF }'`
 CURRENT_VERSION=`"$_java" -version 2>&1 | awk -F'"' '/version/ {first = $1; print}'`
-=======
-_java=`where java | awk -F\, 'NR==1{print $1}'`
-CURRENT_VERSION=`"$_java" -version 2>&1 | awk -F'"' '/version/ {print $2}'`
->>>>>>> 3ef28b05a... Bash script now works when Java path has spaces
 minimal_version=`echo $MINIMAL_VERSION | awk -F'.' '{ print $2 }'`
 current_version=`echo $CURRENT_VERSION | awk -F'.' '{ print $2 }'`
 if [ $current_version ]; then
